@@ -1,0 +1,87 @@
+<div ng-controller="new_coupon_Controller" >
+<h1>New Coupon: </h1>
+<br>
+<form class="css-form" name="myform">
+<table>
+		<tr>		
+		<td>
+		<label>Title:</label>
+		</td>		
+		<td>
+		<input type="text" name="title" ng-model="title" required="required"/>
+		</td>
+		</tr>
+		
+		<tr>				
+		<td>		
+		<label>Date validity from:</label>
+		</td>
+		<td>
+		<input type="date" name="startDate" ng-model="start" ng-change="updateMin()" required="required"/> format: yyyy-MM-dd
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<label>Date validity until:</label>
+		</td>
+		<td>
+		<input type="date" name="endDate" ng-model="end" min="{{min | date:'yyyy-MM-dd'}}" required="required"/> format: yyyy-MM-dd
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<label>Amount of coupons:</label>
+		</td>
+		<td>
+		<input type="number" name="amount" min="1" ng-model="amount" required="required"/>
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<label>Category:</label>		
+		</td>
+		<td>
+		<select ng-model="type.value" ng-init="type.value='Camping'" >
+			<option ng-repeat="type in allTypes | orderBy:'value'" >{{type.value}}</option>
+		 </select>
+
+		</td>
+		</tr>
+		<tr>
+		<td>
+		<label>Description:</label>
+		</td>
+		<td>
+			<textarea name="message" rows="4" cols="5" ng-model="desc" maxlength="240" required="required"></textarea>
+		</td>
+		</tr>
+		
+		<tr>
+		<td>
+		<label>Price:</label>
+		</td>
+		<td>
+			<input name="price" type="number" min="0" step="any" ng-model="price" required="required"/> Nis.
+		</td>
+		</tr>
+		<tr>
+		<td></td>
+		<td>
+		<input class="btn btn-warning" style="float: left;" type="reset" ng-click="reset()">
+		<input class="btn btn-primary" style="float: right;" type="submit" ng-disabled="!myform.$valid" value="Create Coupon" ng-click="submit()"> 
+
+		
+		</td>
+		<tr>
+		<td colspan="2">
+		<div class="feedback">{{result}}</div>
+		</td>
+			
+				
+</table>
+</form>
+
+</div>

@@ -1,0 +1,29 @@
+<div ng-controller="Customer_Controller">
+<div>
+<table class="table table-striped">
+				<tr >
+					<th>Title</th>
+					<th>Expiration Date</th>
+					<th>Price</th>
+				</tr>
+				<tr dir-paginate="coupon in myCoupons |filter:searchText | orderBy:'title' | itemsPerPage:15 " name="paginate">
+					<td>{{coupon.title}} </td>
+					<td>{{coupon.endDate | date:"MMM dd, yyyy"}}</td>
+					<td>{{coupon.price}}</td>
+				</tr>		
+	</table>
+	<div ng-show="!myCoupons.length">
+		<h2>There are no coupons in your list.</h2>
+		</div>
+		<div id="paging">
+ 		<div class="pagination">			 
+		    <dir-pagination-controls max-size="3" 
+		    direction-links="true"  
+		    boundary-links="true"
+		    auto-hide="false" 
+		    template-url="Partials/Customer/pagination.html" >
+			</dir-pagination-controls>
+		</div>
+		</div>
+	</div>
+</div>

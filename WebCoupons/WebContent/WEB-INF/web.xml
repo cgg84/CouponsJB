@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>restful</display-name>
+<!-- <servlet>
+
+ <servlet-name>services</servlet-name>
+  	<servlet-class>com.ws.Services</servlet-class> 
+  	<init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.ws</param-value>            
+    </init-param>
+  </servlet> -->
+  
+  <servlet>
+    <servlet-name>coupons</servlet-name>
+    <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>    
+    <init-param>
+      <param-name>com.sun.jersey.config.property.packages</param-name>
+      <param-value>com.ws</param-value>
+      </init-param>  
+	<init-param> 
+	    <param-name>jersey.config.server.provider.classnames</param-name> 
+	    <param-value>org.glassfish.jersey.filter.LoggingFilter;  org.glassfish.jersey.media.multipart.MultiPartFeature</param-value>	     
+	</init-param>
+	<init-param>
+    	<param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+    	<param-value>true</param-value>
+	</init-param>
+    
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>coupons</servlet-name>
+    <url-pattern>/coupons/*</url-pattern>
+  </servlet-mapping>
+ 
+<!-- <servlet-mapping>
+    <servlet-name>services</servlet-name>
+    <url-pattern>/images/*</url-pattern>
+  </servlet-mapping> -->
+</web-app> 

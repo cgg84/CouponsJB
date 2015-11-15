@@ -1,0 +1,69 @@
+<!-- Company DIV -->
+<div ng-controller="Admin_company_Controller">
+	<h1>Companies Management</h1>
+	<br>
+	<button ng-click="showAddPanel()" class="btn btn-primary">Add Company</button>	
+		<div ng-show="addCompanyPanel" class="element animate-show">
+		<form name="addForm" class="css-form">
+			<input type="text" ng-model="addNameComp" placeholder="Name" required="required" > 
+			<input type="text" ng-model="addPassComp" placeholder="Password" required="required">
+			<input type="email" ng-model="addEmailComp" placeholder="E-Mail" required="required">
+			<br>	
+			<button ng-click="addCompany()" type="submit" ng-disabled="!addForm.$valid" class="btn btn-primary">Add</button>
+			<input type="reset" ng-click="addCompanyCanceled()" class="btn btn-primary" value="Cancel">
+		</form>
+		</div>
+	<br>
+	<br>
+	<!--  Update User Div -->	
+		<div ng-show="updateCompanyPanel" class="element animate-show">
+		<form name="updateForm" class="css-form">	
+				<input type="text" ng-model="updateCompName" disabled="disabled" placeholder="Name" required="required">{{compnay.custName}}				
+				<input type="text" ng-model="updateCompPass" placeholder="Password" required="required">{{company.password}}
+				<input type="email" ng-model="updateEmailComp" placeholder="E-Mail" required="required">{{company.email}}
+				<br>	
+				<button ng-click="updateCompany()" type="submit" ng-disabled="!updateForm.$valid" class="btn btn-primary">Edit</button>
+				<button ng-click="updateCompanyCanceled()" class="btn btn-primary">Cancel</button>
+		</form>		
+		</div>
+	
+	
+	Search: <input type="text" ng-model="searchText">	
+	<br><br>
+	<table class="table table-striped">
+				<tr >
+					<th>ID</th>
+					<th>Name</th>
+					<th>Password</th>
+					<th>E-Mail</th>
+					<th>Manage</th>
+				</tr>
+				<tr dir-paginate="company in viewCompanies |filter:searchText | orderBy:'id' | itemsPerPage:5 " name="paginate">
+					<td>{{company.id}} </td>
+					<td>{{company.compName}} </td>
+					<td>{{company.password}}</td>
+					<td>{{company.email}}</td>
+						<td>
+							<button ng-click="selectCompanyPanel(company)" class="btn btn-warning">Update</button>
+							<button ng-click="deleteComp(company)" class="btn btn-danger">Delete</button>
+							<button ng-click="viewIncomeLog(company.compName)" class="btn btn-success">Incomes</button> 
+						</td>
+				</tr>		
+	</table>
+	<div ng-show="!viewCompanies.length">
+		<h2>There are no customers.</h2>
+		</div>
+		<div id="paging">
+ 		<div class="pagination">			 
+		    <dir-pagination-controls max-size="5" 
+		    direction-links="true"  
+		    boundary-links="true"
+		    auto-hide="false" 
+		    template-url="Partials/Admin/pagination.html" >
+			</dir-pagination-controls>
+		</div>
+		</div>
+		<div class="feedback">{{actionStatus}}</div>
+</div>
+	
+<!-- END OF Company DIV -->

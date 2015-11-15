@@ -1,0 +1,68 @@
+<!-- Customer DIV -->
+<div ng-controller="Admin_customer_Controller">
+
+		<h1>Customers Management</h1>	
+		<br>
+		<button ng-click="addPanel()" class="btn btn-primary">Add Customer</button>	
+		<div ng-show="addCustomerPanel" class = "element animate-show">
+		<form name="addForm" class="css-form">
+			<input type="text" ng-model="addNameCust" placeholder="Name" required="required"> 
+			<input type="text" ng-model="addPassCust" placeholder="Password" required="required">
+			<input type="email" ng-model="addEmailCust" placeholder="E-Mail" required="required">
+			<br>	
+			<button ng-click="addCustomer()" type="submit" ng-disabled="!addForm.$valid" class="btn btn-primary">Add</button>
+			<input type="reset" ng-click="addCustomerCanceled()" class="btn btn-primary" value="Cancel">
+		</form>
+		</div>
+		
+		<br>
+		<br>
+		<!--  Update User Div -->	
+		<div ng-show="updateCustomerPanel" class="element animate-show">
+		<form name="updateForm" class="css-form">	
+				<input type="text" ng-model="updateCustName" disabled="disabled" placeholder="Name" required="required">{{customer.custName}}				
+				<input type="text" ng-model="updateCustPass" placeholder="Password" required="required">{{customer.password}}
+				<input type="email" ng-model="updateEmailCust" placeholder="E-Mail" required="required">{{customer.email}}
+				<br>	
+				<button ng-click="updateCustomer()" type="submit" ng-disabled="!updateForm.$valid" class="btn btn-primary">Update</button>
+				<button ng-click="updateCustomerCanceled()" class="btn btn-primary">Cancel</button>
+		</form>		
+		</div>
+		
+
+		Search: <input type="text" ng-model="searchText">						
+		<table class="table table-striped">
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Password</th>
+						<th>E-Mail</th>
+						<th>Manage</th>					
+					</tr>								
+					<tr dir-paginate="customer in viewCustomers |filter:searchText | orderBy:'id' | itemsPerPage:5 " name="paginate">
+							<td>{{customer.id}}</td>
+							<td>{{customer.custName}}</td>
+							<td>{{customer.password}}</td>
+							<td>{{customer.email}}</td>
+							<td>								
+								<button ng-click="selectCustomerPanel(customer)" class="btn btn-warning">Edit</button>
+								<button ng-click="deleteCust(customer)" class="btn btn-danger">Delete</button>
+								<button ng-click="viewIncomeLog(customer.custName)" class="btn btn-success">Incomes</button>  
+							</td>
+					</tr>
+		</table>
+		<div ng-show="!viewCustomers.length">
+		<h2>There are no customers.</h2>
+		</div>
+		<div id="paging">
+ 		<div class="pagination">			 
+		    <dir-pagination-controls max-size="5" 
+		    direction-links="true"  
+		    boundary-links="true"
+		    auto-hide="false" 
+		    template-url="Partials/Admin/pagination.html" >
+			</dir-pagination-controls>
+		</div>
+		</div>
+		<div class="feedback">{{actionStatus}}</div>
+</div>

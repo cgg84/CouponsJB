@@ -1,0 +1,54 @@
+<!-- Login Div -->
+<div id="login">
+<div align="center" style="width: 100%">
+<h2 >Welcome</h2><br>
+<h3 >Please login: </h3>
+</div>
+<br>
+<div ng-controller="login">
+<div align="center">
+<form name="myLogin" class="css-form"">
+<span style="color: red;font-style: italic;">{{loginRes}}</span>
+<table style="align:right;">
+	<tr>
+		<td>
+			<label>Username:</label>
+		</td>
+		<td>		
+			<input id="username" type="text" ng-model="user" required="required"/>
+		</td> 
+	</tr>
+	<tr>
+		<td>
+			<label>Password:</label>
+		</td>
+		<td>
+			<input id="password" ng-model="password" type="password" required="required"/>
+
+		</td> 
+	</tr>
+		<tr>
+		<td>
+			<label>Connect as:</label>
+		</td>
+		<td>
+			<select ng-model="type" >
+				<option value="customer" selected>Customer</option>
+				<option value="company">Company</option>
+				<option value = "admin">Admin</option>
+			</select>
+		</td> 
+	</tr>
+	<tr>
+	<td>
+	</td>
+	<td>
+	<input class="btn btn-primary" style="float: right;" type="submit" ng-disabled="!myLogin.$valid" value="Login" ng-keyup="$event.keyCode == 13 ? login() : null" ng-click="login()">
+	</td>
+	</tr>
+</table>
+</form>
+</div>				
+</div>
+</div>
+<!-- End of login div  -->

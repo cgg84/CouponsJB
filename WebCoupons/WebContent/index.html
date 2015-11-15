@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="keywords" content=""/> 
+<meta name="description" content=""/>
+<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+
+
+<link href="Style/style.css"  rel="stylesheet" 	type="text/css" 	media="all" />
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-animate.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.0/angular-route.min.js" ></script>
+<script src="Scripts/dirPagination.js"></script>
+<script src="Scripts/Coupons_app_controllers.js"></script>
+<script src="Scripts/jquery.min.js"></script>
+<script src="https://rawgit.com/ghostbar/angular-file-model/master/angular-file-model.js"></script>
+<script src="Scripts/bootstrap.min.js"></script>
+<script src="Scripts/ui-bootstrap-tpls-0.13.4.min.js"></script>
+
+<title>Chen's Coupon WebSite</title>
+
+<meta charset="utf-8" />
+
+
+</head>
+<body ng-app="couponApp">
+
+
+	<div id="content">
+		<div id="header">
+			<h1><a href="/">Coupon WebSite</a></h1>
+			<h2>Purchase today, Save tomorrow!</h2>
+		</div>
+		<!-- navBars -->
+		<div ng-controller="navBars_Controller">
+		<input type="hidden" ng-model="username"></input>
+			<div class="blue" ng-show="companyNavBar" > <!-- Company -->
+			<ul>
+			<li><a href="#/CompanyPage">Our Coupons</a></li> 
+			<li><a href="#/newCoupon">New Coupon</a></li>
+			<li><a href="#/CompanyLogs">Logs</a></li> 
+			<li class="logout" style="float: right;"><a href="" ng-click="logOff()">Sign Out <span style="color: yellow;font-style: italic;">{{username}}</span> </a></li>
+			</ul>
+		</div>
+		
+		
+		<div class="blue" ng-show="adminNavBar"> <!-- Admin -->
+			<ul>
+			<li><a href="#/adminPage/Customers">Customers</a></li> 
+			<li><a href="#/adminPage/Companies">Companies</a></li>
+			<li><a href="#/adminPage/AllLogs">All Logs</a></li>
+			<li class="logout" style="float: right;"><a href="" ng-click="logOff()">Sign Out <span style="color: yellow;font-style: italic;">{{username}}</span></a></li>
+		</ul>
+		</div>
+		
+		<div class="blue" ng-show="customerNavBar"> <!-- customer -->
+			<ul>
+			<li><a href="#/CustomerPage">Coupons</a></li> 
+			<li><a href="#/myCoupons">My Coupons</a></li>
+			<li class="logout" style="float: right;"><a href="" ng-click="logOff()">Sign Out <span style="color: yellow;font-style: italic;">{{username}}</span></a></li> <!-- <a >Sign out</a> -->
+		</ul>
+		</div>
+		</div>
+	<div id="full">		
+			
+			<div ng-view class="view-animate">		
+				<div class="content" >
+					<!-- Main Content -->
+				</div>
+		</div>
+		
+		
+		<div style="clear: both;"></div>
+	</div>
+	
+	</div>
+	<div id="footer"><a href="mailto:cgrinberg@gmail.com">Chen Grinberg </a> | Design and Template from FreeCss
+	</div>
+	
+</body>
+</html>
+

@@ -1,0 +1,42 @@
+<div ng-controller="Customer_Controller">
+<div>
+<br>
+<h1>{{selectedCoupon.title}}</h1>
+<br>
+<img src="{{selectedCoupon.image}}" style="max-width: 350px;max-height: 350px;">
+<p><h2>
+{{selectedCoupon.message}}
+</p>
+</h2>
+<br>
+<p><h2 style="color: #4D6699 ;">
+Now!! 
+For Only {{selectedCoupon.price}} Nis.
+</p>
+</h2>
+
+
+<br>
+<h3>Term of use</h3> <br> 
+<p>
+Chen Coupon`s is features cutting edge coupons not available anywhere but here! 
+
+Acquisition and implementation Chen's Coupon indefinitely, subject to available stock
+Choose collecting or sending time of purchase, how exercise can not be changed
+Home delivery: plus 49nis only
+Please enter a shipping address when purchasing
+Delivery time: 5 business days after receiving the Chen`s Coupon email
+Collection: After 7 business days from the date of purchase and for 30 days, by appointment only, and only by a credit card in presenting ID and credit card, apply, forwarding 9 Petah Tikva, days and hours: Sunday, 10: 30-14: 30
+Phone coordination and inquiries: 03-noSuchNumber
+Cancellation Policy: Subject to the terms and conditions of Chen's Coupon (Article 24) and the Consumer Protection Act
+Business (or Chen`s Coupon) is solely responsible for the quality, nature and treatment of products and / or services released
+See the rules that apply to all transactions
+</p>
+<br>
+<br>
+<br>
+<p><b>Availble coupons: {{selectedCoupon.amount}}</b></p>
+<p><b><i>The coupon is valid until: {{selectedCoupon.endDate | date:"MMM d,yyyy"}}</b></i></p>
+<p><button class="btn btn-primary" style="float: right;" ng-click="buyCoupon(selectedCoupon)">Purchase Coupon</button></p>
+<div class="feedback">{{result}}</div>
+</div>

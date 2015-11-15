@@ -1,0 +1,34 @@
+<div ng-controller="Admin_allLogs_Controller">
+
+<H2>All Income Logs</H2>
+<table class="table table-striped">
+				<tr >				
+					
+					<th>Name</th>
+					<th>Date</th>					
+					<th>Operation</th>
+					<th>Amount</th>
+				</tr>
+				<tr dir-paginate="log in logs |filter:searchText | orderBy:'date' | itemsPerPage:15 " name="paginate">					
+					<td>{{log.name}}</td>
+					<td>{{log.date | date:"MMM dd, yyyy"}}</td>
+					<td>{{log.type}}</td>
+					<td>{{log.amount}}</td>
+				</tr>		
+	</table>
+	<div ng-show="!logs.length">
+		<h2>There are no logs</h2>
+		</div>
+		<div id="paging">
+ 		<div class="pagination">			 
+		    <dir-pagination-controls max-size="3" 
+		    direction-links="true"  
+		    boundary-links="true"
+		    auto-hide="false" 
+		    template-url="Partials/Admin/pagination.html" >
+			</dir-pagination-controls>
+		</div>
+		</div>
+</div>
+
+

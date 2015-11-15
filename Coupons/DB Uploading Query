@@ -1,0 +1,129 @@
+-- Tables Creation
+-- Drop all tables.
+/*
+drop table app.Company_Coupon;
+drop table app.Customer_Coupon;
+drop table app.Coupon;
+drop table app.Company;
+drop table app.Customer;
+*/
+
+create table app.Company
+(ID bigint not null primary key GENERATED ALWAYS AS IDENTITY
+        (START WITH 10000000, INCREMENT BY 1),
+ COMP_NAME varchar(30) not null,
+ PASSWORD varchar(30) not null,
+ EMAIL varchar(50) not null
+ );
+ 
+create table app.Customer
+(ID bigint not null primary key GENERATED ALWAYS AS IDENTITY
+        (START WITH 10000000, INCREMENT BY 1),
+ CUST_NAME varchar(30) not null,
+ PASSWORD varchar(30) not null,
+ EMAIL varchar(50) not null
+ );
+ 
+create table app.Coupon
+(ID bigint not null primary key GENERATED ALWAYS AS IDENTITY
+        (START WITH 10000000, INCREMENT BY 1),
+ TITLE varchar(30) not null,
+ START_DATE date not null,
+ END_DATE date not null,
+ AMOUNT int not null,
+ TYPE varchar(15) not null,
+ MESSAGE varchar(250) not null,
+ PRICE decimal(6,2) not null,
+ IMAGE varchar(250) not null
+ );
+ 
+ --Joins 
+ CREATE TABLE app.Company_Coupon
+(
+COMP_ID bigint not null,
+COUPON_ID bigint not null, 
+CONSTRAINT pk_Coupon_Company PRIMARY KEY (COMP_ID,COUPON_ID),
+FOREIGN KEY (COMP_ID) REFERENCES app.Company(ID),
+FOREIGN KEY (COUPON_ID) REFERENCES app.Coupon(ID)
+);
+
+ CREATE TABLE app.Customer_Coupon
+(
+CUST_ID bigint not null,
+COUPON_ID bigint not null, 
+CONSTRAINT pk_Coupon_Customer PRIMARY KEY (CUST_ID,COUPON_ID),
+FOREIGN KEY (CUST_ID) REFERENCES app.Customer(ID),
+FOREIGN KEY (COUPON_ID) REFERENCES app.Coupon(ID)
+);
+
+
+--Generate Companies entries
+
+INSERT INTO APP.COMPANY (COMP_NAME, PASSWORD, EMAIL)
+  VALUES ('Aroma', '12345', 'mona@aroma.co.il');
+INSERT INTO APP.COMPANY (COMP_NAME, PASSWORD, EMAIL)
+  VALUES ('Greg', '12345', 'dave@greg.co.il');
+INSERT INTO APP.COMPANY (COMP_NAME, PASSWORD, EMAIL)
+  VALUES ('CafeCafe', '12345', 'asaf@cafecafe.co.il');
+INSERT INTO APP.COMPANY (COMP_NAME, PASSWORD, EMAIL)
+  VALUES ('Loft', '12345', 'michal@mitloft.co.il');
+INSERT INTO APP.COMPANY (COMP_NAME, PASSWORD, EMAIL)
+  VALUES ('Groupon', '12345', 'michal@coupons.co.il');
+
+--Generate Customer entries
+INSERT INTO APP.CUSTOMER (CUST_NAME, PASSWORD, EMAIL)
+  VALUES ('Aviv', '123', 'aviv@gmail.com');
+INSERT INTO APP.CUSTOMER (CUST_NAME, PASSWORD, EMAIL)
+  VALUES ('Ron', '123', 'Ron@gmail.com');
+INSERT INTO APP.CUSTOMER (CUST_NAME, PASSWORD, EMAIL)
+  VALUES ('Lital', '1234', 'Lital@gmail.com');
+INSERT INTO APP.CUSTOMER (CUST_NAME, PASSWORD, EMAIL)
+  VALUES ('Tali', '1234', 'Tali@gmail.com');
+
+--Generate Coupons entries
+INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE, MESSAGE, PRICE, IMAGE)
+  VALUES ('BreakFast 75NIS', '2015-01-01', '2016-01-01', 200, 'RESTAURANTS', 'Breakfast for one, only 75NIS - At Aroma', 75.0, '///img.mako.co.il/2011/09/19/IGAD1_c.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE, MESSAGE, PRICE, IMAGE)
+  VALUES ('BreakFast 120NIS', '2015-01-01', '2015-11-30', 200, 'RESTAURANTS', 'Breakfast for two, only 120NIS - At Aroma', 120.0, '///img.mako.co.il/2011/09/19/IGAD1_c.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE, MESSAGE, PRICE, IMAGE)
+  VALUES ('Israely Brackfast 1+1', '2013-01-01', '2016-12-31', 150, 'RESTAURANTS', 'Breakfast 1+1, only 59NIS - At Cafecafe', 59.0, '///images.mouse.co.il/storage/1/3/ggg-120131508_9633750_0..png');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE, MESSAGE, PRICE, IMAGE)
+  VALUES ('BokerZugi', '2015-02-02', '2015-11-30', 100, 'RESTAURANTS', 'Shakshuka zugit! only 50NIS - At Greg', 50.0, '///zimerim.org.il/Editor/assets/1302623596.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE,   MESSAGE, PRICE, IMAGE)
+  VALUES ('Screen Protector', '2015-01-01', '2015-07-31', 260, 'ELECTRICITY', 'Screen Gurrila Protector, include installation', 20.0, '///www.droid-life.com/wp-content/uploads/2012/06/glass-nexus.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE,   MESSAGE, PRICE, IMAGE)
+  VALUES ('2015 in Berlin', '2015-01-01', '2015-12-31', 30, 'TRAVELING', 'Traveling package - include flight, bed and breakfast - 2099 for single', 2099.0, '///i.telegraph.co.uk/multimedia/archive/03106/berlin_3106509c.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE,  MESSAGE, PRICE, IMAGE)
+  VALUES ('2015 in Greece', '2015-01-01', '2015-12-31', 30, 'TRAVELING', 'Traveling package - include flight, bed and breakfast - 799 for single', 799.0, '///stmary-stgeorge.org.uk/wp-content/uploads/2014/09/greece-wallpaper-20-high-quality-1024x768.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE,  MESSAGE, PRICE, IMAGE)
+  VALUES ('2015 in Burgas', '2015-01-01', '2015-12-31', 30, 'TRAVELING', 'Traveling package - include flight, bed and breakfast - 1699 for single', 1699.0, '///www.tnetnoc.com/hotelphotos/681/239681/2241284-Barcelo-Royal-Beach-Hotel-Burgas-Pool-1-DEF.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE,  MESSAGE, PRICE, IMAGE)
+  VALUES ('Orthopedic Midrasim', '2015-01-01', '2016-07-31', 100, 'HEALTH', 'Midrasim', 299.0, '///www.fitsteppro.co.il/files/content/b__2_.jpg');
+  INSERT INTO APP.COUPON (TITLE, START_DATE, END_DATE, AMOUNT, TYPE,  MESSAGE, PRICE, IMAGE)
+  VALUES ('Nutrition Club', '2015-01-01', '2016-01-01', 130, 'HEALTH', 'Nutritions and Diet - 5 meetings 79NIS', 79.0, '///img.grouponcdn.com/deal/kB86ust12exAXALaugAmux/main700x420-700x420/v1/c700x420.jpg');
+  
+  --Generate Coupons for Companies entries
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) VALUES(10000000, 10000000);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) VALUES(10000000, 10000001);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) VALUES(10000002, 10000002);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) values(10000001, 10000003);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) values(10000004, 10000004);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) values(10000004, 10000005);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) values(10000004, 10000006);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) values(10000004, 10000007);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) values(10000004, 10000008);
+INSERT INTO APP.COMPANY_COUPON (COMP_ID, COUPON_ID) values(10000004, 10000009);
+
+
+  --Generate Coupons for Customers entries
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000000, 10000006);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000000, 10000007);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000002, 10000003);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000002, 10000007);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000001, 10000002);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000003, 10000002);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000002, 10000004);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000003, 10000004);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000003, 10000006);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000001, 10000008);
+insert into APP.CUSTOMER_COUPON (CUST_ID, COUPON_ID) values(10000002, 10000009);
